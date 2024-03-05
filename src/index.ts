@@ -1,8 +1,15 @@
-// import { Sequelize } from 'sequelize';
-// import database from './database/db';
+import express from 'express';
+import router from './routers';
+import dotenv from 'dotenv';
+dotenv.config({ path: './config/.env' });
 
-// (async () => {
-//     const produto = require('./Models/produto');
-//     await database.sync();
-//     console.log('deve serdaas talbe');
-// })();
+const app = express();
+app.use(express.json());
+const port = process.env.PORT || 3000;
+
+// Usando o roteador dinamico definido
+app.use(router);
+
+app.listen(port, async () => {
+    console.log(`Server is running on port ${port} .`);
+});

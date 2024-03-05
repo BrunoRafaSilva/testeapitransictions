@@ -14,18 +14,6 @@ const methodHandlers: { [key: string]: (path: string, ...handlers: ((req: Reques
     DELETE: router.delete.bind(router),
 };
 
-declare global {
-    // eslint-disable-next-line @typescript-eslint/no-namespace
-    namespace Express {
-        interface Request {
-            pagination?: {
-                limit: number;
-                offset: number;
-            }
-        }
-    }
-}
-
 // Middleware de paginação
 const paginationMiddleware = (req: Request, res: Response, next: NextFunction) => {
     req.pagination = {
