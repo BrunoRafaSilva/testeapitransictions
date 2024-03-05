@@ -6,11 +6,11 @@ const router = express.Router();
 
 const controllersDir = path.join(__dirname, '..', 'controllers', 'dynamic');
 // Mapeamento de métodos HTTP para funções do roteador
-const methodHandlers: { [key: string]: unknown } = {
-    GET: router.get,
-    POST: router.post,
-    PUT: router.put,
-    DELETE: router.delete,
+const methodHandlers: { [key: string]: (path: string, handler: (...args: unknown[]) => unknown) => void } = {
+    GET: router.get.bind(router),
+    POST: router.post.bind(router),
+    PUT: router.put.bind(router),
+    DELETE: router.delete.bind(router),
 };
 
 // Função para registrar rotas dinamicamente
