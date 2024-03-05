@@ -10,7 +10,12 @@ const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
     dialect: 'mysql',
     host: dbHost,
     port: dbPort,
-    sync: { force: true },
 });
-
+sequelize.sync()
+    .then(() => {
+        console.log('Tabela sincronizada.');
+    })
+    .catch((error) => {
+        console.error('Erro ao sincronizar.', error);
+    });
 export default sequelize;
