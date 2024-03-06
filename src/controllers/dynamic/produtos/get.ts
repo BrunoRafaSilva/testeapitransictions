@@ -8,10 +8,10 @@ export default async function findAll(req: Request, res: Response) {
         where.id = req.query.id;
     }
 
-    let clientes; // Declare the 'clientes' variable
+    let produtos;
 
     try {
-        clientes = await Produtos.findAll({ // Assign the value to 'clientes'
+        produtos = await Produtos.findAll({
             limit: req.pagination?.limit,
             offset: req.pagination?.offset,
             where: where,
@@ -20,9 +20,9 @@ export default async function findAll(req: Request, res: Response) {
         return res.status(500).json({ message: `${error} Erro ao buscar produtos` }); // Add a closing parenthesis
     }
 
-    if (clientes.length === 0) {
+    if (produtos.length === 0) {
         return res.status(404).json({ message: 'Nenhum produto encontrado' });
     }
 
-    res.json(clientes);
+    res.status(200).json({ error: false, message: produtos });
 }
