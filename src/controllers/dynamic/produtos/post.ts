@@ -7,9 +7,14 @@ export default async (req: Request, res: Response) => {
         nome: z.string(),
         preco: z.number(),
         descricao: z.string().optional(),
-    }).parse(req.query);
+    });
 
-    const result = await Produtos.create(produtoSchema);
+    const newProduto = produtoSchema.safeParse(req.query);
+
+    if (!newProduto.success) return res.status(500).json({ error: true, message: 'Erro ao criar produto' });
+
+    const result = await Produtos.create(newProduto);
+
     if (!result) res.status(500).json({ error: true, message: 'Erro ao criar produto' });
     else res.status(201).json({ error: false, message: result });
 };
