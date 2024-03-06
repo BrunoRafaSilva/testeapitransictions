@@ -23,7 +23,7 @@ export default async (req: Request, res: Response) => {
     await Cliente.update(updateCliente.data, { where: where });
 
     Cliente.findByPk(where.id).then((result) => {
-        if (result === null) {
+        if (result) {
             res.status(404).json({ error: true, message: 'Cliente informado não encontrado' });
         } else {
             res.status(200).json({ error: false, data: result });
