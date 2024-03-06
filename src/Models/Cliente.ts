@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import database from '../database/db';
 
 const Cliente = database.define('Cliente', {
-    id: {
+    id_cliente: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: true,
@@ -13,7 +13,7 @@ const Cliente = database.define('Cliente', {
     }, contato: {
         type: Sequelize.STRING,
         allowNull: true,
-    },
+    }, observacao: Sequelize.STRING,
 }, {
     tableName: 'CLIENTES',
     timestamps: true,
