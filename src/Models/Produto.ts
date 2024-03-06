@@ -17,7 +17,7 @@ const Produto = database.define('Produto', {
 }, {
     tableName: 'PRODUTOS',
     timestamps: true,
-    updatedAt: false,
+    updatedAt: true,
 });
 
 export default Produto;
