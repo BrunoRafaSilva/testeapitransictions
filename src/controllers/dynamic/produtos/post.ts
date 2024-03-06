@@ -15,6 +15,8 @@ export default async (req: Request, res: Response) => {
 
     const result = await Produtos.create(newProduto);
 
-    if (!result) res.status(500).json({ error: true, message: 'Erro ao criar produto' });
-    else res.status(201).json({ error: false, message: result });
+    if (!result) { return res.status(500).json({ error: true, message: 'Erro ao criar produto' }); }
+    else {
+        return res.status(201).json({ error: false, message: result });
+    }
 };
