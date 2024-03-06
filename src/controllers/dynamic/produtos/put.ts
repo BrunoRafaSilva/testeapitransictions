@@ -22,11 +22,11 @@ export default async (req: Request, res: Response) => {
 
     await Produto.update(updateProduto.data, { where: where });
 
-    Produto.findAll({ where: where }).then((result) => {
-        if (result.length > 0) {
-            res.status(200).json({ error: false, data: result });
+    Produto.findByPk(where.id).then((result) => {
+        if (result === null) {
+            res.status(404).json({ error: true, message: 'Produto informado não encontrado' });
         } else {
-            res.status(404).json({ error: true, message: 'Sem produtos encontrados' });
+            res.status(200).json({ error: false, data: result });
         }
     });
 
