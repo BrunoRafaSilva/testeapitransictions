@@ -2,7 +2,7 @@ import { Response, Request } from 'express';
 import { WhereOptions } from 'sequelize';
 import Clientes from '../../../Models/Cliente';
 
-export default async function findAll(req: Request, res: Response) {
+export default async (req: Request, res: Response) => {
     const where: WhereOptions = {};
     if (req.query.id) {
         where.id = req.query.id;
@@ -25,4 +25,4 @@ export default async function findAll(req: Request, res: Response) {
     }
 
     res.status(200).json({ error: false, message: clientes });
-}
+};
