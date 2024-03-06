@@ -14,4 +14,10 @@ const Cliente = database.define('Cliente', {
         type: Sequelize.STRING,
         allowNull: true,
     },
+}, {
+    tableName: 'CLIENTES',
+    timestamps: true,
+    updatedAt: true,
 });
+
+export default Cliente;
