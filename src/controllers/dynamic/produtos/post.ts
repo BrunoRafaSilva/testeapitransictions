@@ -6,10 +6,10 @@ export default async (req: Request, res: Response) => {
     const produtoSchema = z.object({
         nome: z.string(),
         preco: z.number(),
-        descricao: z.string(),
+        descricao: z.string().optional(),
     }).parse(req.query);
 
     const result = await Produtos.create(produtoSchema);
-    if (!result) res.json({ message: 'Erro ao criar produto' });
+    if (!result) res.status(500).json({ error: true, message: 'Erro ao criar produto' });
     else res.status(201).json(result);
 };
