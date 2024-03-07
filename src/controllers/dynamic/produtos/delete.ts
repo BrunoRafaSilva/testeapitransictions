@@ -1,6 +1,7 @@
 import { WhereOptions } from 'sequelize';
 import { Request, Response } from 'express';
 import Produto from '../../../Models/Produto';
+import HttpError from '../../../middlewares/HttpError';
 
 export default async (req: Request, res: Response) => {
     const where: WhereOptions = {};
@@ -8,9 +9,9 @@ export default async (req: Request, res: Response) => {
         where.id = req.query.id;
     }
 
-    await Produto.destroy({ where: where }).then((result) => {
+    const deleta = await Produto.destroy({ where: where }).then((result) => {
         if (result === 0) {
-            res.status(404).json({ error: true, message: 'Produto informado não encontrado' });
+            throw new HttpError('Produto informado não encontrado', 400);
         } else {
             res.status(200).json({ error: false, message: 'Produto deletado com sucesso' });
         }

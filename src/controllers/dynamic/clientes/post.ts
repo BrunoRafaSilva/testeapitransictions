@@ -2,6 +2,7 @@ import z, { ZodError } from 'zod';
 import { Response, Request } from 'express';
 import Clientes from '../../../Models/Cliente';
 import zodValidator from '../../../middlewares/zodError';
+import HttpError from '../../../middlewares/HttpError';
 
 export default async (req: Request, res: Response) => {
     const clienteSchema = z.object({
@@ -17,7 +18,7 @@ export default async (req: Request, res: Response) => {
     const result = await Clientes.create(newCLiente.data);
 
     if (!result) {
-        throw new Error('Nenhum cliente criado');
+        throw new HttpError('Nenhum cliente criado', 500);
     }
     else {
         return result;

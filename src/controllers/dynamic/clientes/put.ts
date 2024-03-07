@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { WhereOptions } from 'sequelize';
 import Cliente from '../../../Models/Cliente';
 import ZodValidator from '../../../middlewares/zodError';
+import HttpError from '../../../middlewares/HttpError';
 
 export default async (req: Request, res: Response) => {
     const where: WhereOptions = {};
@@ -22,11 +23,13 @@ export default async (req: Request, res: Response) => {
 
     await Cliente.update(updateCliente.data, { where: where });
 
-    Cliente.findByPk(where.id).then((result) => {
+    const atualizaCliente = Cliente.findByPk(where.id).then((result) => {
         if (result) {
-            res.status(404).json({ error: true, message: 'Cliente informado não encontrado' });
+            return result;
         } else {
-            res.status(200).json({ error: false, data: result });
+            throw new HttpError('Cliente não encontrado', 404);
         }
     });
+
+    return atualizaCliente;
 };

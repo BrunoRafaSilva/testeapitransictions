@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Cliente_1 = __importDefault(require("../../../Models/Cliente"));
+const HttpError_1 = __importDefault(require("../../../middlewares/HttpError"));
 exports.default = async (req, res) => {
     var _a, _b;
     const where = {};
@@ -16,7 +17,7 @@ exports.default = async (req, res) => {
         where: where,
     });
     if (clientes.length === 0) {
-        throw new Error('Nenhum cliente encontrado');
+        throw new HttpError_1.default('Nenhum cliente encontrado', 404);
     }
     return clientes;
 };

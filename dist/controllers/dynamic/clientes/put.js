@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const zod_1 = __importDefault(require("zod"));
 const Cliente_1 = __importDefault(require("../../../Models/Cliente"));
 const zodError_1 = __importDefault(require("../../../middlewares/zodError"));
+const HttpError_1 = __importDefault(require("../../../middlewares/HttpError"));
 exports.default = async (req, res) => {
     const where = {};
     if (req.query.id) {
@@ -20,12 +21,13 @@ exports.default = async (req, res) => {
     if (!updateCliente.success)
         return (0, zodError_1.default)(updateCliente.error, res);
     await Cliente_1.default.update(updateCliente.data, { where: where });
-    Cliente_1.default.findByPk(where.id).then((result) => {
+    const atualizaCliente = Cliente_1.default.findByPk(where.id).then((result) => {
         if (result) {
-            res.status(404).json({ error: true, message: 'Cliente informado não encontrado' });
+            return result;
         }
         else {
-            res.status(200).json({ error: false, data: result });
+            throw new HttpError_1.default('Cliente não encontrado', 404);
         }
     });
+    return atualizaCliente;
 };

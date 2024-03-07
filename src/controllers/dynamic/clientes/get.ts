@@ -1,6 +1,7 @@
 import { Response, Request } from 'express';
 import { WhereOptions } from 'sequelize';
 import Clientes from '../../../Models/Cliente';
+import HttpError from '../../../middlewares/HttpError';
 
 export default async (req: Request, res: Response) => {
     const where: WhereOptions = {};
@@ -15,7 +16,7 @@ export default async (req: Request, res: Response) => {
     });
 
     if (clientes.length === 0) {
-        throw new Error('Nenhum cliente encontrado');
+        throw new HttpError('Nenhum cliente encontrado', 404);
     }
 
     return clientes;
