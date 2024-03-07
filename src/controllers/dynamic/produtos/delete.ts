@@ -1,4 +1,3 @@
-import z from 'zod';
 import { WhereOptions } from 'sequelize';
 import { Request, Response } from 'express';
 import Produto from '../../../Models/Produto';
