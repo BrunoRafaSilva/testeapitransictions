@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { WhereOptions } from 'sequelize';
 import Produto from '../../../Models/Produto';
 import ZodValidator from '../../../middlewares/zodError';
+import HttpError from '../../../middlewares/HttpError';
 
 export default async (req: Request, res: Response) => {
     const where: WhereOptions = {};
@@ -22,12 +23,14 @@ export default async (req: Request, res: Response) => {
 
     await Produto.update(updateProduto.data, { where: where });
 
-    Produto.findByPk(where.id).then((result) => {
+    const atualizaProduto = Produto.findByPk(where.id).then((result) => {
         if (result === null) {
-            res.status(404).json({ error: true, message: 'Produto informado não encontrado' });
+            throw new HttpError('Produto não encontrado', 404);
         } else {
-            res.status(200).json({ error: false, data: result });
+            return result;
         }
     });
+
+    return atualizaProduto;
 
 };

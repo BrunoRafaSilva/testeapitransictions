@@ -12,8 +12,8 @@ export default async (req: Request, res: Response) => {
     const deleta = await Produto.destroy({ where: where }).then((result) => {
         if (result === 0) {
             throw new HttpError('Produto informado não encontrado', 400);
-        } else {
-            res.status(200).json({ error: false, message: 'Produto deletado com sucesso' });
         }
     });
+
+    return deleta;
 };
