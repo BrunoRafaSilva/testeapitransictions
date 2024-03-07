@@ -16,6 +16,10 @@ export default async (req: Request, res: Response) => {
 
     const result = await Clientes.create(newCLiente.data);
 
-    if (!result) res.status(500).json({ error: true, message: 'Erro ao criar cliente' });
-    else res.status(201).json({ error: false, message: result });
+    if (!result) {
+        throw new Error('Nenhum cliente criado');
+    }
+    else {
+        return result;
+    }
 };

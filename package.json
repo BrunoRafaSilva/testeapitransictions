@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node --files src/index.ts",
-    "dev": "nodemon --exec ts-node --files src/index.ts"
+    "start2": "node dist",
+    "dev": "nodemon --exec ts-node --files src/index.ts",
+    "dev2": "nodemon-- exec tsc -w --files src/index.ts",
+    "dev3": "npx nodemon"
   },
   "repository": {
     "type": "git",

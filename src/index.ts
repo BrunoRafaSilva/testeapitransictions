@@ -1,7 +1,7 @@
 import express, { Response, Request, NextFunction } from 'express';
 import router from './routers';
 import dotenv from 'dotenv';
-import { errorMiddleware } from './middlewares/error';
+import middlewareErrors from './middlewares/error';
 dotenv.config({ path: './config/.env' });
 
 // export const paginationMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -13,14 +13,16 @@ dotenv.config({ path: './config/.env' });
 // };
 
 const app = express();
+
 app.use(express.json());
+
 const port = process.env.PORT || 3000;
 
 router(app);
 // Usando o roteador dinamico definido
 // app.use(paginationMiddleware);
 
-// app.use(errorMiddleware);
+// app.use(middlewareErrors);
 
 app.listen(port, async () => {
     console.log(`Server is running on port ${port} .`);

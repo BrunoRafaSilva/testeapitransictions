@@ -1,21 +1,18 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const HttpError_1 = __importDefault(require("./HttpError"));
+var HttpError_1 = require("./HttpError");
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const middlewareErrors = (err, res) => {
+var middlewareErrors = function (err, res) {
     if (!(err instanceof Error)) {
-        err = new Error(`Uma exceção foi provocada sem passar a instância de Error: ${JSON.stringify(err)}`);
+        err = new Error("Uma exce\u00E7\u00E3o foi provocada sem passar a inst\u00E2ncia de Error: ".concat(JSON.stringify(err)));
     }
     // formatação do erro
-    const result = {
+    var result = {
         name: err.name,
         message: err.message,
         stack: err.stack,
     };
-    Object.keys(err).forEach((value) => {
+    Object.keys(err).forEach(function (value) {
         result[value] = err[value];
     });
     res.status((true
