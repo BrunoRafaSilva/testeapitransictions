@@ -16,6 +16,7 @@ const Produto = database.define('Produto', {
     descricao: Sequelize.STRING,
 }, {
     tableName: 'PRODUTOS',
+    modelName: 'Produto',
     timestamps: true,
     updatedAt: true,
 });

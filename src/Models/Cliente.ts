@@ -16,6 +16,7 @@ const Cliente = database.define('Cliente', {
     }, observacao: Sequelize.STRING,
 }, {
     tableName: 'CLIENTES',
+    modelName: 'Cliente',
     timestamps: true,
     updatedAt: true,
 });
