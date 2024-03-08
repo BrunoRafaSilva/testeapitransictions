@@ -8,8 +8,8 @@ export default async (req: Request, res: Response) => {
     const vendaSchema = z.object({
         cliente: z.string().transform((val) => parseInt(val)),
         produto: z.string().transform((val) => parseInt(val)),
-        meio_pagamento: z.string(),
-        desconto: z.string().optional(),
+        meio_pagamento: z.enum(['DINHEIRO', 'CARTAO DE CREDITO', 'CARTAO DE DEBITO', 'PIX']),
+        desconto: z.string().transform((val) => Boolean(val)).optional(),
         valor_desconto: z.string().optional(),
         valor_final: z.string(),
         observacao: z.string().optional(),
