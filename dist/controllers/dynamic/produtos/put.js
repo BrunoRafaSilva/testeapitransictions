@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const zod_1 = __importDefault(require("zod"));
 const Produto_1 = __importDefault(require("../../../Models/Produto"));
 const zodError_1 = __importDefault(require("../../../middlewares/zodError"));
+const HttpError_1 = __importDefault(require("../../../middlewares/HttpError"));
 exports.default = async (req, res) => {
     const where = {};
     if (req.query.id) {
@@ -20,12 +21,13 @@ exports.default = async (req, res) => {
     if (!updateProduto.success)
         return (0, zodError_1.default)(updateProduto.error, res);
     await Produto_1.default.update(updateProduto.data, { where: where });
-    Produto_1.default.findByPk(where.id).then((result) => {
+    const atualizaProduto = Produto_1.default.findByPk(where.id).then((result) => {
         if (result === null) {
-            res.status(404).json({ error: true, message: 'Produto informado não encontrado' });
+            throw new HttpError_1.default('Produto não encontrado', 404);
         }
         else {
-            res.status(200).json({ error: false, data: result });
+            return result;
         }
     });
+    return atualizaProduto;
 };

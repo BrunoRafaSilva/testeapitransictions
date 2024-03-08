@@ -4,14 +4,16 @@ import Clientes from '../../../Models/Cliente';
 import HttpError from '../../../middlewares/HttpError';
 
 export default async (req: Request, res: Response) => {
+    const limite = req.query.limit || 5;
+    const foraSet = req.query.offset || 0;
     const where: WhereOptions = {};
     if (req.query.id) {
         where.id = req.query.id;
     }
 
     const clientes = await Clientes.findAll({
-        limit: req.pagination?.limit,
-        offset: req.pagination?.offset,
+        limit: Number(limite),
+        offset: Number(foraSet),
         where: where,
     });
 

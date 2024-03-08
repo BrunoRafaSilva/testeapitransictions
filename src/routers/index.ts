@@ -25,6 +25,7 @@ export default (app: Application) => {
         try {
             if (req.method !== 'OPTIONS') {
                 responseBody = await middlewareRouters(req, res);
+                req.query.limit = '1';
             } else {
                 res.status(200);
                 responseBody = '';

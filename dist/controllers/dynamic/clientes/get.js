@@ -6,14 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Cliente_1 = __importDefault(require("../../../Models/Cliente"));
 const HttpError_1 = __importDefault(require("../../../middlewares/HttpError"));
 exports.default = async (req, res) => {
-    var _a, _b;
+    const limite = req.query.limit || 5;
+    const foraSet = req.query.offset || 0;
     const where = {};
     if (req.query.id) {
         where.id = req.query.id;
     }
     const clientes = await Cliente_1.default.findAll({
-        limit: (_a = req.pagination) === null || _a === void 0 ? void 0 : _a.limit,
-        offset: (_b = req.pagination) === null || _b === void 0 ? void 0 : _b.offset,
+        limit: Number(limite),
+        offset: Number(foraSet),
         where: where,
     });
     if (clientes.length === 0) {

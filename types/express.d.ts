@@ -2,9 +2,9 @@ declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace
     namespace Express {
         interface Request {
-            pagination?: {
-                limit: number;
-                offset: number;
+            custom: {
+                offset?: number,
+                limit?: number
             }
         }
     }
