@@ -25,7 +25,7 @@ export default async (req: Request, res: Response) => {
 
     const atualizaProduto = Produto.findByPk(where.id).then((result) => {
         if (result === null) {
-            throw new HttpError('Produto não encontrado', 404);
+            throw new HttpError('Produto não encontrado.', 404);
         } else {
             return result;
         }
