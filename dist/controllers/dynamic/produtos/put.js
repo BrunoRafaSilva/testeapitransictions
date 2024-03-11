@@ -23,7 +23,7 @@ exports.default = async (req, res) => {
     await Produto_1.default.update(updateProduto.data, { where: where });
     const atualizaProduto = Produto_1.default.findByPk(where.id).then((result) => {
         if (result === null) {
-            throw new HttpError_1.default('Produto não encontrado', 404);
+            throw new HttpError_1.default('Produto não encontrado.', 404);
         }
         else {
             return result;

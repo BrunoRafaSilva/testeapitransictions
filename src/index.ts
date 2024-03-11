@@ -1,7 +1,7 @@
 import express, { Response, Request, NextFunction } from 'express';
 import router from './routers';
 import dotenv from 'dotenv';
-import { paginationMiddleware } from './middlewares/pagination';
+// import { paginationMiddleware } from './middlewares/pagination';
 dotenv.config({ path: './config/.env' });
 
 // export const paginationMiddleware = (req: Request, res: Response, next: NextFunction) => {
