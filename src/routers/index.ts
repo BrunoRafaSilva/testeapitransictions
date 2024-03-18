@@ -22,6 +22,7 @@ export default (app: Application) => {
 
     app.use(async (req: Request, res: Response) => {
         let responseBody;
+        let success = true;
         try {
             if (req.method !== 'OPTIONS') {
                 responseBody = await middlewareRouters(req, res);
@@ -32,12 +33,19 @@ export default (app: Application) => {
             }
         } catch (err) {
             responseBody = middlewareErrors(err, res);
+            success = false;
         }
+
         if (typeof (responseBody) === 'number') {
             responseBody = responseBody.toString();
         }
 
-        res.send(responseBody);
+        const response = {
+            ok: success,
+            result: responseBody,
+        };
+
+        res.send(response);
     });
 
 };
