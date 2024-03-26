@@ -31,3 +31,4 @@ exports.default = async (req, res) => {
     });
     return atualizaProduto;
 };
+//# sourceMappingURL=put.js.map

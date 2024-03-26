@@ -24,3 +24,4 @@ exports.default = async (req, res) => {
         return result;
     }
 };
+//# sourceMappingURL=post.js.map

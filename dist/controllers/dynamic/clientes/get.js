@@ -22,3 +22,4 @@ exports.default = async (req, res) => {
     }
     return clientes;
 };
+//# sourceMappingURL=get.js.map

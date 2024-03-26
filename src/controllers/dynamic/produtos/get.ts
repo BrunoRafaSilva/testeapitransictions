@@ -19,7 +19,7 @@ export default async (req: Request, res: Response) => {
     });
 
     if (produtos.length === 0) {
-        throw new HttpError('Nenhum produto encontrado', 404);
+        throw new HttpError('Nenhum produto enccontrado', 404);
     }
 
     return produtos;

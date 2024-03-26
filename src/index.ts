@@ -1,4 +1,5 @@
 import express, { Response, Request, NextFunction } from 'express';
+import sequelize from './database/db';
 import router from './routers';
 import dotenv from 'dotenv';
 // import { paginationMiddleware } from './middlewares/pagination';
@@ -25,5 +26,12 @@ router(app);
 // app.use(middlewareErrors);
 
 app.listen(port, async () => {
-    console.log(`Server is running on port ${port} .`);
+    try {
+        await sequelize.authenticate();
+        await sequelize.sync();
+        console.log('Connection has been established successfully.');
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+        console.log(`Server is running on port ${port} .`);
+    }
 });

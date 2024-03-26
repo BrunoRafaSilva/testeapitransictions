@@ -18,7 +18,8 @@ exports.default = async (req, res) => {
         where: where,
     });
     if (produtos.length === 0) {
-        throw new HttpError_1.default('Nenhum produto encontrado', 404);
+        throw new HttpError_1.default('Nenhum produto enccontrado', 404);
     }
     return produtos;
 };
+//# sourceMappingURL=get.js.map

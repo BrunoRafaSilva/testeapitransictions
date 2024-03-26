@@ -29,7 +29,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const error_1 = __importDefault(require("../middlewares/error"));
 const PATH_DYNAMIKC_ROUTERS = path_1.default.join(__dirname, '..', 'controllers', 'dynamic');
-const REGEX = /{(.*?)}/g;
 const middlewareRouters = async (req, res) => {
     const pathFolder = `${PATH_DYNAMIKC_ROUTERS}${req.path.toLowerCase()}`;
     const pathController = path_1.default.join(pathFolder, `${req.method.toLowerCase()}.js`);
@@ -39,6 +38,7 @@ const middlewareRouters = async (req, res) => {
 exports.default = (app) => {
     app.use(async (req, res) => {
         let responseBody;
+        let success = true;
         try {
             if (req.method !== 'OPTIONS') {
                 responseBody = await middlewareRouters(req, res);
@@ -51,10 +51,16 @@ exports.default = (app) => {
         }
         catch (err) {
             responseBody = (0, error_1.default)(err, res);
+            success = false;
         }
         if (typeof (responseBody) === 'number') {
             responseBody = responseBody.toString();
         }
-        res.send(responseBody);
+        const response = {
+            ok: success,
+            result: responseBody,
+        };
+        res.send(response);
     });
 };
+//# sourceMappingURL=index.js.map

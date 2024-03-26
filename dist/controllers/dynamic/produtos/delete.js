@@ -17,3 +17,4 @@ exports.default = async (req, res) => {
     });
     return deleta;
 };
+//# sourceMappingURL=delete.js.map

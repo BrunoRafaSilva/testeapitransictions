@@ -1,13 +1,9 @@
 import express, { Application } from 'express';
-import http from 'node:http';
-import fs from 'fs';
 import path from 'path';
 import { Response, Request, NextFunction } from 'express';
-import { object, string } from 'zod';
 import middlewareErrors from '../middlewares/error';
 
 const PATH_DYNAMIKC_ROUTERS = path.join(__dirname, '..', 'controllers', 'dynamic');
-const REGEX = /{(.*?)}/g;
 
 const middlewareRouters = async (req: express.Request, res: express.Response) => {
     const pathFolder = `${PATH_DYNAMIKC_ROUTERS}${req.path.toLowerCase()}`;
